@@ -1,5 +1,14 @@
 import type { SiteSettings } from "@/types";
 
+/** Prefix local public paths with NEXT_PUBLIC_BASE_PATH for GitHub Pages project sites. */
+export function assetPath(path: string): string {
+  if (/^https?:\/\//i.test(path) || path.startsWith("data:")) {
+    return path;
+  }
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
 export function formatPrice(price: number): string {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { assetPath } from "@/lib/utils";
 
 interface SalonLogoProps {
   salonName: string;
@@ -19,7 +20,7 @@ export default function SalonLogo({
   return (
     <Link href="/" className="group flex items-center gap-3">
       <Image
-        src={logoUrl}
+        src={assetPath(logoUrl)}
         alt={`${salonName} logo`}
         width={isFooter ? 48 : 44}
         height={isFooter ? 48 : 44}

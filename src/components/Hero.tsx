@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { SiteSettings } from "@/types";
-import { whatsappUrl } from "@/lib/utils";
+import { assetPath, whatsappUrl } from "@/lib/utils";
 
 interface HeroProps {
   settings: SiteSettings;
@@ -12,7 +12,7 @@ export default function Hero({ settings }: HeroProps) {
       <div
         className="absolute inset-0 bg-cover bg-center opacity-30"
         style={{
-          backgroundImage: `url(${settings.heroImage ?? "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=80"})`,
+          backgroundImage: `url(${assetPath(settings.heroImage ?? "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=80")})`,
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-teal-950/95 via-teal-900/80 to-teal-900/60" />

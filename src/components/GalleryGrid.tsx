@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { assetPath } from "@/lib/utils";
 import type { GalleryImage, GalleryCategory } from "@/types";
 
 interface GalleryGridProps {
@@ -38,7 +39,7 @@ export default function GalleryGrid({
           className="group relative aspect-square overflow-hidden rounded-xl bg-teal-50"
         >
           <Image
-            src={image.url}
+            src={assetPath(image.url)}
             alt={image.caption ?? "Salon gallery"}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
