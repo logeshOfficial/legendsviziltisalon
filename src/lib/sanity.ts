@@ -43,7 +43,8 @@ export async function rawSanityQuery<T>(query: string): Promise<T | null> {
       headers: {
         ...(writeToken ? { Authorization: `Bearer ${writeToken}` } : {}),
       },
-      cache: "no-store",
+      // No cache: "no-store" — incompatible with static export (output: "export")
+      // Static builds fetch fresh on every build run by default
     });
     if (!res.ok) {
       console.error(`Sanity query failed: ${res.status} ${res.statusText}`);

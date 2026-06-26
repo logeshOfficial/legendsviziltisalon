@@ -46,11 +46,30 @@ jobs:
 
       - name: Verify Sanity data was fetched
         run: |
+          echo "=== Env check ==="
+          echo "Project ID set: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID != '' }}"
+          echo "Write token set: ${{ secrets.NEXT_PUBLIC_SANITY_WRITE_TOKEN != '' }}"
           echo "=== Checking if Sanity data was embedded in build ==="
           echo "Searching for Sanity CDN URLs in built output..."
           grep -r "cdn.sanity.io" out/ --include="*.html" -l | head -5 || echo "No CDN URLs found — data may not have been fetched"
           echo "Checking for placeholder data markers..."
           grep -r "post-01.jpg" out/ --include="*.html" -l | head -3 && echo "WARNING: placeholder images found" || echo "OK: no placeholder images"
+          echo "=== Raw Sanity API test ==="
+          PROJECT_ID="${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}"
+          TOKEN="${{ secrets.NEXT_PUBLIC_SANITY_WRITE_TOKEN }}"
+          if [ -z "$PROJECT_ID" ]; then
+            echo "ERROR: NEXT_PUBLIC_SANITY_PROJECT_ID secret is empty!"
+          else
+            echo "Project ID length: ${#PROJECT_ID}"
+            RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "Authorization: Bearer $TOKEN" \
+              "https://$PROJECT_ID.api.sanity.io/v2024-01-01/data/query/production?query=*%5B_type%3D%3D%22service%22%5D%7C%20order(order%20asc)%5B0...3%5D%7B_id%2Cname%2Cprice%7D")
+            echo "Sanity API HTTP status: $RESPONSE"
+            BODY=$(curl -s \
+              -H "Authorization: Bearer $TOKEN" \
+              "https://$PROJECT_ID.api.sanity.io/v2024-01-01/data/query/production?query=*%5B_type%3D%3D%22service%22%5D%7C%20order(order%20asc)%5B0...3%5D%7B_id%2Cname%2Cprice%7D")
+            echo "Response body: $BODY"
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
