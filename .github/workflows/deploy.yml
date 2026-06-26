@@ -36,6 +36,11 @@ jobs:
           # Project site: https://<user>.github.io/<repo>/
           # User site (repo named <user>.github.io): set NEXT_PUBLIC_BASE_PATH to "" in repo Variables
           NEXT_PUBLIC_BASE_PATH: /legendsviziltisalon
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+          NEXT_PUBLIC_SANITY_API_VERSION: "2024-01-01"
+          NEXT_PUBLIC_SANITY_WRITE_TOKEN: ${{ secrets.NEXT_PUBLIC_SANITY_WRITE_TOKEN }}
+          NEXT_PUBLIC_ADMIN_PASSWORD: ${{ secrets.NEXT_PUBLIC_ADMIN_PASSWORD }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
