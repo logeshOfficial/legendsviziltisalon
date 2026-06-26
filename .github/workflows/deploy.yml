@@ -35,8 +35,6 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: "true"
-          # Project site: https://<user>.github.io/<repo>/
-          # User site (repo named <user>.github.io): set NEXT_PUBLIC_BASE_PATH to "" in repo Variables
           NEXT_PUBLIC_BASE_PATH: /legendsviziltisalon
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
           NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
@@ -45,6 +43,14 @@ jobs:
           NEXT_PUBLIC_ADMIN_USERNAME: ${{ secrets.NEXT_PUBLIC_ADMIN_USERNAME }}
           NEXT_PUBLIC_ADMIN_PASSWORD: ${{ secrets.NEXT_PUBLIC_ADMIN_PASSWORD }}
           NEXT_PUBLIC_GITHUB_DEPLOY_TOKEN: ${{ secrets.NEXT_PUBLIC_GITHUB_DEPLOY_TOKEN }}
+
+      - name: Verify Sanity data was fetched
+        run: |
+          echo "=== Checking if Sanity data was embedded in build ==="
+          echo "Searching for Sanity CDN URLs in built output..."
+          grep -r "cdn.sanity.io" out/ --include="*.html" -l | head -5 || echo "No CDN URLs found — data may not have been fetched"
+          echo "Checking for placeholder data markers..."
+          grep -r "post-01.jpg" out/ --include="*.html" -l | head -3 && echo "WARNING: placeholder images found" || echo "OK: no placeholder images"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
