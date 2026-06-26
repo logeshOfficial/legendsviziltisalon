@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, master]
   repository_dispatch:
-    types: [sanity-content-update]
+    types: [sanity-content-update, manual-publish]
   workflow_dispatch:
 
 permissions:
@@ -44,6 +44,7 @@ jobs:
           NEXT_PUBLIC_SANITY_WRITE_TOKEN: ${{ secrets.NEXT_PUBLIC_SANITY_WRITE_TOKEN }}
           NEXT_PUBLIC_ADMIN_USERNAME: ${{ secrets.NEXT_PUBLIC_ADMIN_USERNAME }}
           NEXT_PUBLIC_ADMIN_PASSWORD: ${{ secrets.NEXT_PUBLIC_ADMIN_PASSWORD }}
+          NEXT_PUBLIC_GITHUB_DEPLOY_TOKEN: ${{ secrets.NEXT_PUBLIC_GITHUB_DEPLOY_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
