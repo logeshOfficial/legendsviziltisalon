@@ -49,13 +49,54 @@ export default function Hero({ settings }: HeroProps) {
             </div>
           </div>
 
-          {/* Right — 3D hairstyling cutout + Hair Spa offer */}
+          {/* Right — 3D hairstyling cutout + offer tags */}
           <div className="flex w-full max-w-sm flex-col items-center lg:max-w-md lg:items-end">
             <div className="hero-3d-scene relative w-full">
               <div
                 className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-gold-500/10 blur-3xl"
                 aria-hidden
               />
+
+              {/* Offer tag — top-left */}
+              <div className="absolute -left-2 top-6 z-20 max-w-[140px] rounded-xl border border-white/15 bg-teal-900/80 px-3 py-2 shadow-lg backdrop-blur-sm sm:top-10">
+                <p className="text-[10px] font-semibold tracking-widest text-gold-400 uppercase">Limited Offer</p>
+                <p className="mt-0.5 text-xs font-semibold text-white leading-tight">Hair Cut</p>
+                <p className="mt-0.5 text-xs">
+                  <span className="text-teal-300/50 line-through">₹300</span>
+                  <span className="ml-1.5 font-bold text-gold-400">₹200</span>
+                </p>
+              </div>
+
+              {/* Offer tag — top-right */}
+              <div className="absolute -right-2 top-20 z-20 max-w-[148px] rounded-xl border border-white/15 bg-teal-900/80 px-3 py-2 shadow-lg backdrop-blur-sm sm:top-28">
+                <p className="text-[10px] font-semibold tracking-widest text-gold-400 uppercase">Limited Offer</p>
+                <p className="mt-0.5 text-xs font-semibold text-white leading-tight">Hair Coloring</p>
+                <p className="mt-0.5 text-xs">
+                  <span className="text-teal-300/50 line-through">₹200</span>
+                  <span className="ml-1.5 font-bold text-gold-400">₹150</span>
+                </p>
+              </div>
+
+              {/* Offer tag — bottom-left */}
+              <div className="absolute -left-2 bottom-24 z-20 max-w-[148px] rounded-xl border border-white/15 bg-teal-900/80 px-3 py-2 shadow-lg backdrop-blur-sm sm:bottom-28">
+                <p className="text-[10px] font-semibold tracking-widest text-gold-400 uppercase">Limited Offer</p>
+                <p className="mt-0.5 text-xs font-semibold text-white leading-tight">Head Massage</p>
+                <p className="mt-0.5 text-xs">
+                  <span className="text-teal-300/50 line-through">₹200</span>
+                  <span className="ml-1.5 font-bold text-gold-400">₹180</span>
+                </p>
+              </div>
+
+              {/* Offer tag — bottom-right (existing Hair Spa) */}
+              <div className="absolute -right-2 bottom-8 z-20 max-w-[140px] rounded-xl border border-white/15 bg-teal-900/80 px-3 py-2 shadow-lg backdrop-blur-sm">
+                <p className="text-[10px] font-semibold tracking-widest text-gold-400 uppercase">Limited Offer</p>
+                <p className="mt-0.5 text-xs font-semibold text-white leading-tight">Hair Spa</p>
+                <p className="mt-0.5 text-xs">
+                  <span className="text-teal-300/50 line-through">₹1,200</span>
+                  <span className="ml-1.5 font-bold text-gold-400">₹700</span>
+                </p>
+              </div>
+
               <div className="hero-3d-float mx-auto w-fit lg:mr-4">
                 <div className="hero-3d-card">
                   <Image
@@ -68,17 +109,6 @@ export default function Hero({ settings }: HeroProps) {
                   />
                 </div>
               </div>
-            </div>
-
-            <div className="mt-5 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-center backdrop-blur-sm lg:text-right">
-              <p className="text-xs font-medium tracking-widest text-gold-400 uppercase">
-                Limited Offer
-              </p>
-              <p className="mt-0.5 font-serif text-lg font-semibold">Hair Spa</p>
-              <p className="mt-0.5 text-sm text-teal-100/80">
-                <span className="text-teal-300/50 line-through">₹1,200</span>
-                <span className="ml-2 text-base font-bold text-gold-400">₹700</span>
-              </p>
             </div>
           </div>
         </div>
