@@ -2,15 +2,17 @@ import {
   placeholderGallery,
   placeholderServices,
   placeholderSettings,
+  placeholderTestimonials,
 } from "@/data/placeholder";
 import {
   allGalleryQuery,
   allServicesQuery,
+  allTestimonialsQuery,
   featuredServicesQuery,
   siteSettingsQuery,
 } from "@/lib/queries";
 import { isSanityConfigured, sanityClient, urlFor } from "@/lib/sanity";
-import type { GalleryImage, Service, SiteSettings } from "@/types";
+import type { GalleryImage, Service, SiteSettings, Testimonial } from "@/types";
 
 async function fetchFromSanity<T>(query: string, params?: Record<string, unknown>): Promise<T | null> {
   if (!sanityClient) return null;
@@ -53,6 +55,13 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
 
   const data = await fetchFromSanity<GalleryImage[]>(allGalleryQuery);
   return data?.length ? data : placeholderGallery;
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  if (!isSanityConfigured) return placeholderTestimonials;
+
+  const data = await fetchFromSanity<Testimonial[]>(allTestimonialsQuery);
+  return data?.length ? data : placeholderTestimonials;
 }
 
 export { urlFor };

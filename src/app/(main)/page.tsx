@@ -5,8 +5,8 @@ import MapEmbed from "@/components/MapEmbed";
 import ServiceCard from "@/components/ServiceCard";
 import GalleryGrid from "@/components/GalleryGrid";
 import Testimonials from "@/components/Testimonials";
-import { whyChooseUs, placeholderTestimonials } from "@/data/placeholder";
-import { getFeaturedServices, getGalleryImages, getSiteSettings } from "@/lib/data";
+import { whyChooseUs } from "@/data/placeholder";
+import { getFeaturedServices, getGalleryImages, getSiteSettings, getTestimonials } from "@/lib/data";
 import { phoneHref, whatsappUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -16,10 +16,11 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [settings, services, gallery] = await Promise.all([
+  const [settings, services, gallery, testimonials] = await Promise.all([
     getSiteSettings(),
     getFeaturedServices(),
     getGalleryImages(),
+    getTestimonials(),
   ]);
 
   return (
@@ -113,7 +114,7 @@ export default async function HomePage() {
               What Our Clients Say
             </h2>
           </div>
-          <Testimonials testimonials={placeholderTestimonials} />
+          <Testimonials testimonials={testimonials} />
         </div>
       </section>
 

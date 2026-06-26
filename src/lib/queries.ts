@@ -59,3 +59,11 @@ export const galleryByCategoryQuery = `*[_type == "galleryImage" && category == 
   "url": image.asset->url
 }`;
 
+export const allTestimonialsQuery = `*[_type == "testimonial"] | order(order asc, _createdAt asc) {
+  _id,
+  name,
+  text,
+  rating,
+  order
+}`;
+
