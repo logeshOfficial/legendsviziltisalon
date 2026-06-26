@@ -43,11 +43,20 @@ export async function getFeaturedServices(): Promise<Service[]> {
     return placeholderServices.filter((s) => s.featured).slice(0, 6);
   }
 
-  const data = await fetchFromSanity<Service[]>(featuredServicesQuery);
-  if (data?.length) return data;
+  // Try featured from Sanity first
+  const featured = await fetchFromSanity<Service[]>(featuredServicesQuery);
+  if (featured?.length) return featured;
 
-  const all = await getServices();
-  return all.filter((s) => s.featured).slice(0, 6);
+  // Try all services from Sanity and filter featured
+  const all = await fetchFromSanity<Service[]>(allServicesQuery);
+  if (all?.length) {
+    const filtered = all.filter((s) => s.featured).slice(0, 6);
+    // If Sanity has services but none are marked featured, show first 6
+    return filtered.length ? filtered : all.slice(0, 6);
+  }
+
+  // Sanity is configured but empty — fall back to placeholder
+  return placeholderServices.filter((s) => s.featured).slice(0, 6);
 }
 
 export async function getGalleryImages(): Promise<GalleryImage[]> {
