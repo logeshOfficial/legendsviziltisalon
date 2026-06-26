@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
+import MapEmbed from "@/components/MapEmbed";
 import ServiceCard from "@/components/ServiceCard";
 import GalleryGrid from "@/components/GalleryGrid";
 import Testimonials from "@/components/Testimonials";
@@ -156,14 +157,7 @@ export default async function HomePage() {
               Book on WhatsApp
             </a>
           </div>
-          <div className="flex min-h-[280px] items-center justify-center rounded-xl border border-teal-200 bg-teal-50">
-            <div className="text-center px-6">
-              <p className="text-sm font-medium text-teal-800">Map Placeholder</p>
-              <p className="mt-2 text-xs text-slate-500">
-                Trichy &amp; Bangalore — embed Google Maps here for production
-              </p>
-            </div>
-          </div>
+          <MapEmbed />
         </div>
       </section>
     </>

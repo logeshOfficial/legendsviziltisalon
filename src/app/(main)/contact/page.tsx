@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
+import MapEmbed from "@/components/MapEmbed";
 import { getSiteSettings } from "@/lib/data";
 import { phoneHref, whatsappUrl } from "@/lib/utils";
 
@@ -67,11 +68,7 @@ export default async function ContactPage() {
             </dl>
           </div>
 
-          <div className="flex min-h-[200px] items-center justify-center rounded-xl border border-teal-200 bg-teal-50">
-            <p className="px-6 text-center text-sm text-slate-500">
-              Google Maps embed placeholder — Trichy &amp; Bangalore
-            </p>
-          </div>
+          <MapEmbed />
         </div>
 
         <div className="rounded-xl border border-teal-100 bg-white p-6 shadow-sm sm:p-8">

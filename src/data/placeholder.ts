@@ -7,7 +7,7 @@ export const placeholderSettings: SiteSettings = {
   phone: "+91 86100 63509",
   whatsapp: "918610063509",
   address:
-    "Trichy & Bangalore — visit our Instagram @at_legends_ or website for branch locations",
+    "At Legend's Premium Unisex Salon, Trichy, Tamil Nadu (10.8214859, 78.683574)",
   hours: "Mon–Sat: 9:00 AM – 8:00 PM | Sun: 10:00 AM – 6:00 PM",
   heroImage: "/gallery/post-01.jpg",
   logoUrl: "/logo.jpg",
