@@ -44,7 +44,8 @@ export async function sanityMutate(
   mutations: unknown[],
   token: string,
 ): Promise<void> {
-  await sanityFetch(`/data/mutate/${dataset}`, token, {
+  // returnIds=true&visibility=sync ensures documents are immediately committed
+  await sanityFetch(`/data/mutate/${dataset}?returnIds=true&visibility=sync`, token, {
     method: "POST",
     body: JSON.stringify({ mutations }),
   });
@@ -74,6 +75,7 @@ export async function uploadImageAsset(
   return data.document._id;
 }
 
+/** Generate a non-draft document ID so content is published immediately */
 export function generateId(): string {
-  return `draft.${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }

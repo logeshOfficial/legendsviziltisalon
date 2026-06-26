@@ -13,7 +13,10 @@ export const sanityClient = isSanityConfigured
       projectId: projectId!,
       dataset,
       apiVersion,
-      useCdn: process.env.NODE_ENV === "production",
+      // Never use CDN during build — always fetch fresh data directly from the API
+      useCdn: false,
+      // Use write token if available (allows reading drafts too)
+      token: process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN,
     })
   : null;
 

@@ -17,7 +17,10 @@ import type { GalleryImage, Service, SiteSettings, Testimonial } from "@/types";
 async function fetchFromSanity<T>(query: string, params?: Record<string, unknown>): Promise<T | null> {
   if (!sanityClient) return null;
   try {
-    return await sanityClient.fetch<T>(query, params ?? {});
+    return await sanityClient.fetch<T>(query, params ?? {}, {
+      // Always fetch the latest published content, bypass any caching
+      cache: "no-store",
+    });
   } catch (error) {
     console.error("Sanity fetch error:", error);
     return null;
