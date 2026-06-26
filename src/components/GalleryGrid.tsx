@@ -33,25 +33,34 @@ export default function GalleryGrid({
 
   return (
     <div className={`grid ${colClass} gap-3 sm:gap-4`}>
-      {filtered.map((image) => (
-        <figure
-          key={image._id ?? image.url}
-          className="group relative aspect-square overflow-hidden rounded-xl bg-teal-50"
-        >
-          <Image
-            src={assetPath(image.url)}
-            alt={image.caption ?? "Salon gallery"}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            sizes="(max-width: 640px) 50vw, 33vw"
-          />
-          {image.caption && (
-            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-teal-950/80 to-transparent px-3 py-3 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100 sm:text-sm">
-              {image.caption}
-            </figcaption>
-          )}
-        </figure>
-      ))}
+      {filtered.map((image) => {
+        // Sanity CDN URLs are absolute — use as-is (no base path prefix needed)
+        // Local placeholder paths need base path prefix for GitHub Pages
+        const src = /^https?:\/\//i.test(image.url)
+          ? image.url
+          : assetPath(image.url);
+
+        return (
+          <figure
+            key={image._id ?? image.url}
+            className="group relative aspect-square overflow-hidden rounded-xl bg-teal-50"
+          >
+            <Image
+              src={src}
+              alt={image.caption ?? "Salon gallery"}
+              fill
+              unoptimized
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 640px) 50vw, 33vw"
+            />
+            {image.caption && (
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-teal-950/80 to-transparent px-3 py-3 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100 sm:text-sm">
+                {image.caption}
+              </figcaption>
+            )}
+          </figure>
+        );
+      })}
     </div>
   );
 }

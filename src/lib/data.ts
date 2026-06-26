@@ -63,14 +63,17 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
   if (!isSanityConfigured) return placeholderGallery;
 
   const data = await fetchFromSanity<GalleryImage[]>(allGalleryQuery);
-  return data?.length ? data : placeholderGallery;
+  // Only fall back if Sanity returned nothing at all (empty project)
+  if (data === null) return placeholderGallery;
+  return data.length ? data : placeholderGallery;
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   if (!isSanityConfigured) return placeholderTestimonials;
 
   const data = await fetchFromSanity<Testimonial[]>(allTestimonialsQuery);
-  return data?.length ? data : placeholderTestimonials;
+  if (data === null) return placeholderTestimonials;
+  return data.length ? data : placeholderTestimonials;
 }
 
 export { urlFor };

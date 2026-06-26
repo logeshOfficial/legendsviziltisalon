@@ -106,3 +106,8 @@ body {
     transform: translateY(-12px);
   }
 }
+
+@keyframes testimonial-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
